@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!-- ^ Говорит браузеру: это современный HTML5-документ -->
+<html lang="en">
+<!-- lang="en" — язык контента (у тебя сайт на английском). Важно для Google и скринридеров -->
+
+<head>
+  <!-- HEAD — «служебная» часть: её не видно на странице, это настройки документа -->
+  <meta charset="UTF-8"> <!-- кодировка, чтобы любые символы отображались правильно -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- чтобы сайт нормально выглядел на телефонах -->
+
+  <!-- То, что видит Google и что показывается во вкладке браузера -->
+  <title>David Davis — Modern Composer</title>
+  <meta name="description" content="Professional composer for movies, video games and multimedia projects. Soundtracks, classical music, custom compositions.">
+
+  <!-- Подключаем наш файл со стилями -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Подключаем шрифты с Google Fonts (бесплатно).
+       Montserrat — близок к тому геометрическому шрифту, что был у тебя на Тильде -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- BODY — всё, что реально видно на странице -->
+
+  <!-- ============================================ -->
+  <!-- МЕНЮ (шапка). Оно зафиксировано наверху через CSS -->
+  <!-- ============================================ -->
+  <header class="site-header">
+    <nav class="nav">
+      <!-- href="#main" означает: прокрути к элементу с id="main" на ЭТОЙ ЖЕ странице.
+           Никаких переходов на другие страницы — то, что тебе и нужно -->
+      <a href="#main" class="nav-link">Main</a>
+      <a href="#soundtracks" class="nav-link">Soundtracks</a>
+      <a href="#videogames" class="nav-link">Video Games</a>
+      <a href="#classic" class="nav-link">Classic</a>
+      <a href="#about" class="nav-link">About Music</a>
+      <a href="#bio" class="nav-link">Bio</a>
+      <a href="#order" class="nav-link">Order Music</a>
+    </nav>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 1: ГЛАВНАЯ -->
+  <!-- ============================================ -->
+  <!-- У каждой секции есть id — «якорь», к которому прокручивает меню -->
+  <section id="main" class="section hero">
+    <div class="hero-content">
+      <h1 class="hero-title">David Davis</h1>
+      <p class="hero-subtitle">Modern Composer</p>
+      <p class="hero-text">
+        Professional composer and musician with an academic background and experience in
+        various musical genres. I specialize in creating music for movies, video games and other
+        multimedia projects. I have extensive experience in popular DAWs (Cubase, FL Studio),
+        as well as skills in arranging, recording and producing music. Ready to cooperate with
+        movie and game studios, as well as with independent content creators.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 2: SOUNDTRACKS -->
+  <!-- ============================================ -->
+  <section id="soundtracks" class="section">
+    <!-- Баннер-заголовок секции (как у тебя картинка с нотами и надписью) -->
+    <div class="section-banner banner-soundtracks">
+      <h2 class="section-title">Soundtracks</h2>
+    </div>
+
+    <!-- Список треков. Каждый трек — это iframe (встроенное окно) от SoundCloud.
+         ГДЕ ВЗЯТЬ КОД: на SoundCloud открой трек → Share → Embed → скопируй код iframe
+         и замени ссылку в src="" ниже (часть после url=) -->
+    <div class="tracks">
+
+      <!-- ТРЕК-ПРИМЕР. Замени ссылку api.soundcloud.com/tracks/XXXXXXX на свою из embed-кода -->
+      <iframe class="track" title="David Davis - The lost Ghost"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1968248131&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+      <iframe class="track" title="David Davis - Ocean"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1843540410&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+      <iframe class="track" title="David Davis - CyberHeros"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1843540602&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 3: VIDEO GAMES -->
+  <!-- ============================================ -->
+  <section id="videogames" class="section">
+    <div class="section-banner banner-videogames">
+      <h2 class="section-title">Video Games</h2>
+    </div>
+
+    <div class="tracks">
+      <iframe class="track" title="Knightlight — Main Theme"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2071441256&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+      <iframe class="track" title="Luminara — Main Menu Music"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2071450260&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 4: CLASSIC -->
+  <!-- ============================================ -->
+  <section id="classic" class="section">
+    <div class="section-banner banner-classic">
+      <h2 class="section-title">Classical</h2>
+    </div>
+
+    <div class="tracks">
+      <iframe class="track" title="Vocalise"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1844758212&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+      <iframe class="track" title="Piano Concert №1 — David Davis"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2071461332&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+      <iframe class="track" title="War Triptych In Three Small Parts"
+        width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1968130407&color=%23c9a227&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false">
+      </iframe>
+
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 5: ABOUT MUSIC (цитата) -->
+  <!-- ============================================ -->
+  <section id="about" class="section section-light">
+    <div class="quote-wrap">
+      <blockquote class="quote">
+        <p>
+          Modern music, music of the 21st century, should be easy for the modern listener to understand,
+          music should bring beauty to the world and inspiration for any person, inspiration should be
+          accessible...
+        </p>
+        <p>
+          In my work I try to achieve certain goals, namely the accessibility of modern music, the beauty
+          and meaningfulness of musical matter, in order to more easily and quickly bring a person closer to
+          the beautiful and absolute
+        </p>
+        <footer class="quote-author">— David Davis</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 6: BIO -->
+  <!-- ============================================ -->
+  <section id="bio" class="section section-light bio">
+    <div class="bio-text">
+      <h2 class="bio-title">Short Biography</h2>
+      <p>
+        David Davis was born in Moscow, studied at a music college, which he graduated with honors,
+        then studied at the Moscow State Conservatory named after P.I. Tchaikovsky, majoring in choir
+        conductor and at the same time studying composition.
+      </p>
+      <p>
+        Even from the first grade of music school, David began to compose, and the very first short plays
+        were often performed by other students of the music school. While studying in college, he was a
+        laureate of several composing competitions. While studying at the conservatory, his works were
+        performed on the stages of concert halls.
+      </p>
+      <p>
+        Now the composer writes, creates and travels around the world, and is always open to creativity
+        and suggestions
+      </p>
+    </div>
+    <!-- Сюда позже поставим твоё фото: положишь файл в папку images и скажешь мне -->
+    <div class="bio-photo"></div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- СЕКЦИЯ 7: ORDER MUSIC -->
+  <!-- ============================================ -->
+  <section id="order" class="section order">
+    <video class="order-video" autoplay muted loop playsinline>
+      <source src="images/order-bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="order-content">
+      <h2 class="order-title">Order Music</h2>
+      <p class="order-text">
+        Contact me now to order music or to discuss our cooperation!<br>
+        daviscomposer777@gmail.com
+      </p>
+      <!-- mailto: открывает почтовый клиент с уже подставленным адресом -->
+      <a href="mailto:daviscomposer777@gmail.com" class="btn-contact">Contact Me</a>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- ПОДВАЛ: соцсети + копирайт -->
+  <!-- ============================================ -->
+  <footer class="site-footer">
+    <div class="socials">
+  <a href="mailto:daviscomposer777@gmail.com" class="social-link" aria-label="Email">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg>
+  </a>
+  <a href="https://www.youtube.com/@DavisComposer" class="social-link" target="_blank" aria-label="YouTube">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2s-.2-1.6-.9-2.3c-.8-.9-1.8-.9-2.2-1C16.7 3.6 12 3.6 12 3.6s-4.7 0-7.9.3c-.4.1-1.4.1-2.2 1-.7.7-.9 2.3-.9 2.3S.8 9.1.8 11v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.7.3 7.7.3s4.7 0 7.9-.3c.4-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8V11c0-1.9-.2-3.8-.2-3.8zM9.7 15.1V8.7l6.1 3.2-6.1 3.2z"/></svg>
+  </a>
+  <a href="https://www.instagram.com/daviscomposer?igsh=ODh4bmo0eDBraTFl&utm_source=qr" class="social-link" target="_blank" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.8" cy="6.2" r="1.1" fill="currentColor" stroke="none"/></svg>
+  </a>
+  <a href="https://soundcloud.com/daviddavis-437802076" class="social-link" target="_blank" aria-label="SoundCloud">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.2 13.4v3.1c0 .2.1.3.3.3s.3-.1.3-.3v-3.1c0-.2-.1-.3-.3-.3s-.3.1-.3.3zm2-1v4.1c0 .2.1.3.3.3s.3-.1.3-.3v-4.1c0-.2-.1-.3-.3-.3s-.3.1-.3.3zm2-.6v4.7c0 .2.1.3.3.3s.3-.1.3-.3v-4.7c0-.2-.1-.3-.3-.3s-.3.1-.3.3zm2-.9v5.6c0 .2.1.3.3.3s.3-.1.3-.3v-5.6c0-.2-.1-.3-.3-.3s-.3.1-.3.3zm2-1.5v7.1c0 .2.1.3.3.3s.3-.1.3-.3V9.4c0-.2-.1-.3-.3-.3s-.3.1-.3.3zm2-.7v7.8c0 .2.2.4.4.4h8.1c1.8 0 3.3-1.5 3.3-3.3 0-1.8-1.5-3.3-3.3-3.3-.4 0-.9.1-1.3.3-.3-2.6-2.5-4.6-5.1-4.6-.7 0-1.4.2-2 .4-.2.1-.1.2-.1.3z"/></svg>
+  </a>
+</div>
+    <p class="copyright">© DavisEditorStudio. All rights reserved</p>
+  </footer>
+
+  <!-- Подключаем наш JavaScript в самом конце body,
+       чтобы он запустился, когда вся страница уже загружена -->
+  <script src="script.js"></script>
+</body>
+</html>
