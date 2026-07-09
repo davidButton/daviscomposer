@@ -49,3 +49,57 @@ const observer = new IntersectionObserver(
 
 // Просим наблюдателя следить за каждой секцией
 sections.forEach((section) => observer.observe(section));
+
+
+
+/* ============================================================
+   ПАРАЛЛАКС ФОНОВЫХ КАРТИНОК
+   Фон движется в ту же сторону, что и скролл, но медленнее.
+   ============================================================ */
+
+// Скорость параллакса: 0 = фон неподвижен в блоке, 1 = приклеен к экрану.
+// 0.15 = фон проезжает 15% от скорости прокрутки. Крути на вкус: 0.1–0.3.
+const PARALLAX_SPEED = 0.15;
+
+// Собираем все помеченные блоки
+const parallaxBlocks = document.querySelectorAll('[data-parallax]');
+
+function updateParallax() {
+  // Высота окна — понадобится, чтобы считать положение секции относительно центра
+  const viewportHeight = window.innerHeight;
+
+  parallaxBlocks.forEach((block) => {
+    // getBoundingClientRect() отдаёт положение блока относительно ОКНА:
+    // .top — сколько пикселей от верха экрана до верха блока
+    const rect = block.getBoundingClientRect();
+
+    // Пропускаем блоки далеко за пределами экрана — незачем их трогать
+    if (rect.bottom < 0 || rect.top > viewportHeight) return;
+
+    // Насколько центр блока смещён от центра экрана (в пикселях).
+    // Когда блок ровно в центре экрана — 0, выше — минус, ниже — плюс.
+    const offsetFromCenter = rect.top + rect.height / 2 - viewportHeight / 2;
+
+    // Сдвигаем фон на долю этого смещения.
+    // 'center calc(50% + Npx)' = по горизонтали центр, по вертикали центр + сдвиг
+    const shift = -offsetFromCenter * PARALLAX_SPEED;
+    block.style.backgroundPosition = `center calc(50% + ${shift}px)`;
+  });
+}
+
+// requestAnimationFrame — «выполни перед следующей отрисовкой кадра».
+// Это правильный способ анимировать на скролле: не чаще 60 раз в секунду
+// и без подтормаживаний, в отличие от голого события scroll.
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateParallax();
+      ticking = false;
+    });
+  }
+});
+
+// И один раз при загрузке, чтобы фоны сразу встали в правильные позиции
+updateParallax();
