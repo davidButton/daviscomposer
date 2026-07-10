@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgs" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f7f5"/>
+      <stop offset="1" stop-color="#e9e9e6"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9c9c4" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#8f8f89"/>
+      <stop offset="1" stop-color="#c9c9c4" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="640" fill="url(#bgs)"/>
+
+  <!-- Дальние бледные волны, для глубины -->
+  <g fill="none" stroke="#d6d6d2" stroke-width="1.2">
+    <path d="M-40 170 C 380 260, 720 90, 1080 180 S 1700 280, 1960 170"/>
+    <path d="M-40 480 C 360 380, 700 560, 1060 470 S 1680 360, 1960 460"/>
+  </g>
+
+  <!-- Главный пучок волн: несколько линий одной формы со сдвигом,
+       как эхо одного звука -->
+  <g fill="none">
+    <path d="M-40 320 C 300 190, 640 460, 980 315 S 1600 170, 1960 300" stroke="url(#wave)" stroke-width="2.6" opacity="0.9"/>
+    <path d="M-40 338 C 300 210, 640 476, 980 333 S 1600 190, 1960 318" stroke="url(#wave)" stroke-width="1.8" opacity="0.65"/>
+    <path d="M-40 356 C 300 230, 640 492, 980 351 S 1600 210, 1960 336" stroke="url(#wave)" stroke-width="1.2" opacity="0.45"/>
+    <path d="M-40 374 C 300 250, 640 508, 980 369 S 1600 230, 1960 354" stroke="url(#wave)" stroke-width="0.8" opacity="0.3"/>
+  </g>
+
+  <!-- Встречная волна -->
+  <g fill="none">
+    <path d="M-40 245 C 340 360, 700 130, 1060 250 S 1660 380, 1960 235" stroke="url(#wave)" stroke-width="2" opacity="0.55"/>
+    <path d="M-40 262 C 340 376, 700 148, 1060 267 S 1660 396, 1960 252" stroke="url(#wave)" stroke-width="1.2" opacity="0.35"/>
+  </g>
+
+  <!-- Тонкие вертикальные штрихи-акценты -->
+  <g stroke="#a8a8a2" stroke-width="1.4" opacity="0.6">
+    <line x1="640"  y1="430" x2="640"  y2="470"/>
+    <line x1="980"  y1="300" x2="980"  y2="368"/>
+    <line x1="1320" y1="235" x2="1320" y2="290"/>
+  </g>
+
+  <!-- Точки-акценты -->
+  <g fill="#7d7d77">
+    <circle cx="500"  cy="278" r="4.4" opacity="0.5"/>
+    <circle cx="980"  cy="334" r="5"   opacity="0.55"/>
+    <circle cx="1460" cy="262" r="4"   opacity="0.5"/>
+    <circle cx="1720" cy="330" r="3.2" opacity="0.4"/>
+    <circle cx="260"  cy="350" r="3.4" opacity="0.4"/>
+  </g>
+</svg>

@@ -116,7 +116,6 @@ body {
 }
 
 .hero-content {
-  max-width: 760px; /* текст не расползается на всю ширину — удобнее читать */
 }
 
 .hero-title {
@@ -125,6 +124,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 4px;
   line-height: 1.05;
+  white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -138,6 +138,9 @@ body {
   margin-top: 28px;
   font-weight: 300;
   color: var(--text-dim);
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ============================================================
@@ -165,19 +168,19 @@ body {
 .banner-soundtracks {
   background: 
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url('images/soundtracks.jpg') center/cover;
+    url('images/banner-soundtracks.svg') center/cover;
 }
 
 .banner-videogames {
   background:
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url('images/videogames.jpg') center/cover;
+    url('images/banner-videogames.svg') center/cover;
 }
 
 .banner-classic {
   background: 
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url('images/classic.jpg') center/cover;
+    url('images/banner-classic.svg') center/cover;
 }
 
 /* ============================================================
