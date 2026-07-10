@@ -204,13 +204,64 @@
   <!-- СЕКЦИЯ 7: ORDER MUSIC -->
   <!-- ============================================ -->
   <section id="order" class="section order">
-    <div class="order-video yt-wrap">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/ByMJ3fBuPWc?autoplay=1&mute=1&loop=1&playlist=ByMJ3fBuPWc&controls=0&rel=0&playsinline=1"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        title="Background video">
-      </iframe>
+    <!-- Фон: стилизованный секвенсор (аранж-окно Cubase), анимация на чистом CSS -->
+    <div class="order-video daw" aria-hidden="true">
+      <svg viewBox="0 0 1920 900" preserveAspectRatio="xMidYMid slice">
+        <!-- Фон и сетка тактов -->
+        <rect width="1920" height="900" fill="#101013"/>
+        <g stroke="#1d1d22" stroke-width="1">
+          <path d="M160 0V900 M320 0V900 M480 0V900 M640 0V900 M800 0V900 M960 0V900 M1120 0V900 M1280 0V900 M1440 0V900 M1600 0V900 M1760 0V900"/>
+        </g>
+        <!-- Линии дорожек -->
+        <g stroke="#232329" stroke-width="1">
+          <path d="M0 100H1920 M0 200H1920 M0 300H1920 M0 400H1920 M0 500H1920 M0 600H1920 M0 700H1920 M0 800H1920"/>
+        </g>
+
+        <!-- Клипы. Каждый: тело + полоска-заголовок сверху + штрихи-"волна" внутри -->
+        <g class="clips">
+          <!-- дорожка 1: Strings -->
+          <g class="clip"><rect x="160" y="112" width="440" height="76" rx="6" fill="#33333b"/><rect x="160" y="112" width="440" height="16" rx="6" fill="#4a4a55"/><path d="M180 168v-20 M196 172v-28 M212 166v-16 M228 174v-30 M244 168v-20 M260 171v-24 M276 166v-15 M292 173v-28 M308 168v-19 M324 172v-26 M340 167v-17 M356 173v-29 M372 169v-21 M388 171v-24 M404 166v-14 M420 172v-27 M436 168v-19 M452 170v-22 M468 166v-15 M484 173v-28 M500 168v-19 M516 171v-24 M532 167v-16 M548 172v-26 M564 168v-20 M580 170v-22" stroke="#6b6b78" stroke-width="2"/></g>
+          <!-- дорожка 1, второй клип -->
+          <g class="clip"><rect x="800" y="112" width="640" height="76" rx="6" fill="#2e2e36"/><rect x="800" y="112" width="640" height="16" rx="6" fill="#43434e"/><path d="M824 170v-24 M848 166v-14 M872 173v-28 M896 168v-20 M920 171v-24 M944 166v-15 M968 172v-27 M992 168v-19 M1016 170v-22 M1040 167v-16 M1064 173v-29 M1088 168v-20 M1112 171v-24 M1136 166v-14 M1160 172v-26 M1184 168v-19 M1208 170v-23 M1232 167v-16 M1256 172v-27 M1280 168v-20 M1304 170v-22 M1328 166v-15 M1352 172v-26 M1376 168v-19 M1400 170v-23 M1424 167v-17" stroke="#63636f" stroke-width="2"/></g>
+
+          <!-- дорожка 2: Brass -->
+          <g class="clip"><rect x="480" y="212" width="520" height="76" rx="6" fill="#36363f"/><rect x="480" y="212" width="520" height="16" rx="6" fill="#50505c"/><path d="M504 272v-26 M528 266v-14 M552 273v-30 M576 268v-20 M600 271v-25 M624 266v-15 M648 272v-28 M672 268v-19 M696 270v-23 M720 267v-16 M744 273v-30 M768 268v-20 M792 271v-24 M816 266v-14 M840 272v-27 M864 268v-19 M888 270v-22 M912 267v-16 M936 272v-28 M960 268v-20 M984 270v-23" stroke="#737381" stroke-width="2"/></g>
+
+          <!-- дорожка 3: Choir, длинный клип -->
+          <g class="clip"><rect x="160" y="312" width="1120" height="76" rx="6" fill="#2b2b33"/><rect x="160" y="312" width="1120" height="16" rx="6" fill="#3f3f4a"/><path d="M200 370v-20 M260 366v-12 M320 373v-28 M380 368v-18 M440 371v-24 M500 366v-13 M560 372v-27 M620 368v-18 M680 370v-22 M740 367v-15 M800 373v-29 M860 368v-19 M920 371v-24 M980 366v-13 M1040 372v-26 M1100 368v-18 M1160 370v-22 M1220 367v-15" stroke="#5c5c68" stroke-width="2"/></g>
+
+          <!-- дорожка 4: Piano -->
+          <g class="clip"><rect x="320" y="412" width="360" height="76" rx="6" fill="#383841"/><rect x="320" y="412" width="360" height="16" rx="6" fill="#53535f"/><path d="M344 470v-22 M368 466v-13 M392 472v-28 M416 468v-18 M440 470v-23 M464 466v-14 M488 472v-27 M512 468v-19 M536 470v-22 M560 467v-15 M584 472v-28 M608 468v-18 M632 470v-23 M656 466v-14" stroke="#77778 5" stroke-width="2"/></g>
+          <g class="clip"><rect x="1120" y="412" width="480" height="76" rx="6" fill="#31313a"/><rect x="1120" y="412" width="480" height="16" rx="6" fill="#48485 3" /><path d="M1144 470v-24 M1168 466v-14 M1192 472v-28 M1216 468v-19 M1240 470v-22 M1264 467v-16 M1288 472v-27 M1312 468v-18 M1336 470v-23 M1360 466v-14 M1384 472v-28 M1408 468v-19 M1432 471v-24 M1456 467v-16 M1480 472v-27 M1504 468v-18 M1528 470v-22 M1552 466v-15 M1576 471v-25" stroke="#67 6774" stroke-width="2"/></g>
+
+          <!-- дорожка 5: Timpani, короткие удары -->
+          <g class="clip"><rect x="160" y="512" width="160" height="76" rx="6" fill="#34343d"/><rect x="160" y="512" width="160" height="16" rx="6" fill="#4d4d59"/><path d="M184 570v-26 M216 564v-12 M248 572v-30 M280 566v-16" stroke="#70707e" stroke-width="2.4"/></g>
+          <g class="clip"><rect x="480" y="512" width="160" height="76" rx="6" fill="#34343d"/><rect x="480" y="512" width="160" height="16" rx="6" fill="#4d4d59"/><path d="M504 570v-26 M536 564v-12 M568 572v-30 M600 566v-16" stroke="#70707e" stroke-width="2.4"/></g>
+          <g class="clip"><rect x="960" y="512" width="240" height="76" rx="6" fill="#34343d"/><rect x="960" y="512" width="240" height="16" rx="6" fill="#4d4d59"/><path d="M984 570v-26 M1016 564v-12 M1048 572v-30 M1080 566v-16 M1112 570v-24 M1144 565v-14 M1176 571v-28" stroke="#70707e" stroke-width="2.4"/></g>
+
+          <!-- дорожка 6: Percussion -->
+          <g class="clip"><rect x="640" y="612" width="880" height="76" rx="6" fill="#2d2d35"/><rect x="640" y="612" width="880" height="16" rx="6" fill="#42424d"/><path d="M664 668v-16 M688 672v-26 M712 666v-12 M736 671v-22 M760 667v-15 M784 672v-27 M808 668v-18 M832 670v-21 M856 666v-13 M880 672v-26 M904 668v-17 M928 670v-21 M952 667v-14 M976 672v-27 M1000 668v-18 M1024 670v-20 M1048 666v-13 M1072 671v-25 M1096 668v-17 M1120 670v-21 M1144 667v-14 M1168 672v-26 M1192 668v-18 M1216 670v-20 M1240 666v-12 M1264 671v-24 M1288 668v-17 M1312 670v-21 M1336 667v-15 M1360 672v-26 M1384 668v-18 M1408 670v-20 M1432 666v-13 M1456 671v-25 M1480 668v-17" stroke="#5e5e6a" stroke-width="2"/></g>
+
+          <!-- дорожка 7: Bass -->
+          <g class="clip"><rect x="160" y="712" width="720" height="76" rx="6" fill="#30303 8"/><rect x="160" y="712" width="720" height="16" rx="6" fill="#464 651"/><path d="M190 770v-22 M230 766v-13 M270 772v-28 M310 768v-18 M350 770v-23 M390 766v-14 M430 772v-27 M470 768v-19 M510 770v-22 M550 767v-15 M590 772v-28 M630 768v-18 M670 770v-23 M710 766v-14 M750 771v-26 M790 768v-18 M830 770v-21" stroke="#6a6a77" stroke-width="2"/></g>
+          <g class="clip"><rect x="1040" y="712" width="560" height="76" rx="6" fill="#30303 8"/><rect x="1040" y="712" width="560" height="16" rx="6" fill="#4 64651"/><path d="M1070 770v-22 M1110 766v-13 M1150 772v-28 M1190 768v-18 M1230 770v-23 M1270 766v-14 M1310 772v-27 M1350 768v-19 M1390 770v-22 M1430 767v-15 M1470 772v-28 M1510 768v-18 M1550 770v-22" stroke="#6a6a77" stroke-width="2"/></g>
+        </g>
+
+        <!-- Плейхед: линия со свечением, едет по CSS-анимации -->
+        <g class="playhead">
+          <rect x="-14" y="0" width="28" height="900" fill="url(#glow)"/>
+          <line x1="0" y1="0" x2="0" y2="900" stroke="#e8e8ee" stroke-width="2"/>
+          <path d="M-10 0 L10 0 L0 16 Z" fill="#e8e8ee"/>
+        </g>
+
+        <defs>
+          <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#e8e8ee" stop-opacity="0"/>
+            <stop offset="0.5" stop-color="#e8e8ee" stop-opacity="0.14"/>
+            <stop offset="1" stop-color="#e8e8ee" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+      </svg>
     </div>
 
     <div class="order-content">

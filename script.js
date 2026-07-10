@@ -103,3 +103,49 @@ window.addEventListener('scroll', () => {
 
 // И один раз при загрузке, чтобы фоны сразу встали в правильные позиции
 updateParallax();
+
+
+
+
+/* ============================================================
+   DAW-СЦЕНА: плейхед + подсветка клипов под ним
+   ============================================================ */
+
+const playhead = document.querySelector('.playhead');
+const clips = document.querySelectorAll('.clip');
+
+// Параметры движения (в координатах SVG, viewBox 1920x900)
+const PH_START = 120;    // старт плейхеда
+const PH_END = 1800;     // конец
+const PH_DURATION = 40;  // секунд на проход
+
+// Заранее считываем у каждого клипа его границы по X.
+// Первый rect внутри группы .clip — тело клипа: берём его x и width
+const clipZones = [];
+clips.forEach((clip) => {
+  const body = clip.querySelector('rect');
+  const x = parseFloat(body.getAttribute('x'));
+  const w = parseFloat(body.getAttribute('width'));
+  clipZones.push({ element: clip, from: x, to: x + w });
+});
+
+function animatePlayhead(timestamp) {
+  // timestamp — миллисекунды с загрузки страницы, даёт сам браузер.
+  // % — остаток от деления: превращает бесконечное время в цикл 0..40с
+  const seconds = (timestamp / 1000) % PH_DURATION;
+  const progress = seconds / PH_DURATION;                // 0..1
+  const x = PH_START + (PH_END - PH_START) * progress;   // позиция плейхеда
+
+  playhead.setAttribute('transform', `translate(${x}, 0)`);
+
+  // Подсветка: класс playing тем клипам, внутри которых сейчас линия
+  clipZones.forEach((zone) => {
+    zone.element.classList.toggle('playing', x >= zone.from && x <= zone.to);
+  });
+
+  requestAnimationFrame(animatePlayhead); // просим следующий кадр — вечный цикл
+}
+
+if (playhead) {
+  requestAnimationFrame(animatePlayhead);
+}
