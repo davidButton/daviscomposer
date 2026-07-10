@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Чёрный квадрат со скруглением углов -->
+  <rect x="2" y="2" width="60" height="60" rx="8" fill="#0d0d0f"/>
+  <!-- Серая рамка: прямоугольник без заливки, только обводка -->
+  <rect x="6" y="6" width="52" height="52" rx="5" fill="none" stroke="#9a9a96" stroke-width="3"/>
+</svg>
