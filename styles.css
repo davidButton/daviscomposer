@@ -198,6 +198,92 @@ body {
 }
 
 /* ============================================================
+   СВОЙ АУДИОПЛЕЕР
+   ============================================================ */
+.player {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e3e3e0;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.player-cover {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0; /* обложка не сжимается, когда тесно */
+}
+
+.player-body { flex: 1; min-width: 0; } /* занять всё остальное место */
+
+.player-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.player-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, background 0.2s;
+}
+.player-btn:hover { background: #b8931f; transform: scale(1.06); }
+.player-btn svg { width: 22px; height: 22px; fill: #fff; }
+
+/* Переключение иконок: по умолчанию видна play, у играющего — pause */
+.icon-pause { display: none; }
+.player.is-playing .icon-play { display: none; }
+.player.is-playing .icon-pause { display: block; }
+
+.player-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a1a1a;
+  overflow: hidden;
+  text-overflow: ellipsis; /* длинное название обрежется в "…" — привет, мобилки */
+  white-space: nowrap;
+}
+
+/* Полоса прогресса: серая дорожка + жёлтая заливка */
+.player-progress {
+  height: 6px;
+  background: #e8e8e5;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+}
+.player-progress:hover { height: 8px; margin-top: -1px; margin-bottom: -1px; }
+
+.player-progress-fill {
+  height: 100%;
+  width: 0%;               /* ширину живьём меняет JS */
+  background: var(--gold);
+  border-radius: 3px;
+  pointer-events: none;    /* клики ловит дорожка, не заливка */
+}
+
+.player-time {
+  display: flex;
+  justify-content: space-between; /* текущее время слева, длительность справа */
+  font-size: 12px;
+  color: #8a8a85;
+  margin-top: 8px;
+}
+
+/* ============================================================
    РАЗДЕЛИТЕЛИ МЕЖДУ СЕКЦИЯМИ
    ============================================================ */
 .divider {

@@ -149,3 +149,78 @@ function animatePlayhead(timestamp) {
 if (playhead) {
   requestAnimationFrame(animatePlayhead);
 }
+
+/* ============================================================
+   АУДИОПЛЕЕР
+   Один код обслуживает все блоки .player на странице.
+   ============================================================ */
+
+const players = document.querySelectorAll('.player');
+let currentAudio = null; // кто сейчас играет — чтобы ставить его на паузу
+
+// Помощник: 95 секунд -> "1:35"
+function formatTime(sec) {
+  if (!isFinite(sec)) return '0:00';
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ':' + String(s).padStart(2, '0'); // padStart добивает "5" до "05"
+}
+
+players.forEach((player) => {
+  // Создаём невидимый аудио-элемент из data-src
+  const audio = new Audio(player.dataset.src);
+  audio.preload = 'metadata'; // скачать только заголовок (длительность), не весь файл
+
+  // Находим детали ЭТОГО плеера (ищем внутри player, не по всей странице!)
+  const btn = player.querySelector('.player-btn');
+  const fill = player.querySelector('.player-progress-fill');
+  const progress = player.querySelector('.player-progress');
+  const timeCurrent = player.querySelector('.time-current');
+  const timeTotal = player.querySelector('.time-total');
+
+  // Когда браузер узнал длительность — показать её
+  audio.addEventListener('loadedmetadata', () => {
+    timeTotal.textContent = formatTime(audio.duration);
+  });
+
+  // Кнопка play/pause
+  btn.addEventListener('click', () => {
+    if (audio.paused) {
+      // Правило хорошего тона: новый трек ставит предыдущий на паузу
+      if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+      }
+      audio.play();
+      currentAudio = audio;
+    } else {
+      audio.pause();
+    }
+  });
+
+  // Синхронизация вида со звуком.
+  // События идут от самого audio — интерфейс просто отражает его состояние
+  audio.addEventListener('play', () => player.classList.add('is-playing'));
+  audio.addEventListener('pause', () => player.classList.remove('is-playing'));
+
+  // Тикает время -> двигаем заливку и цифры
+  audio.addEventListener('timeupdate', () => {
+    const percent = (audio.currentTime / audio.duration) * 100 || 0;
+    fill.style.width = percent + '%';
+    timeCurrent.textContent = formatTime(audio.currentTime);
+  });
+
+  // Клик по полосе = перемотка
+  progress.addEventListener('click', (event) => {
+    const rect = progress.getBoundingClientRect();
+    // Где кликнули относительно начала полосы, в долях 0..1
+    const ratio = (event.clientX - rect.left) / rect.width;
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  // Трек закончился — вернуть кнопку play и заливку в начало
+  audio.addEventListener('ended', () => {
+    player.classList.remove('is-playing');
+    fill.style.width = '0%';
+    audio.currentTime = 0;
+  });
+});
