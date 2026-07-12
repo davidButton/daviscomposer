@@ -58,6 +58,11 @@ body {
   backdrop-filter: blur(8px);          /* размытие того, что проезжает под меню — модный эффект */
 }
 
+.nav-logo,
+.nav-burger {
+  display: none;
+}
+
 .nav {
   display: flex;             /* flex — раскладывает детей в ряд */
   justify-content: center;   /* по центру горизонтально */
@@ -77,8 +82,12 @@ body {
   transition: color 0.25s;    /* плавное перетекание цвета при наведении/активации */
 }
 
-.nav-link:hover {
-  color: var(--gold);
+/* Ховеры — только для устройств с настоящим курсором (мышь/тачпад).
+   На тачскринах hover "залипает" после тапа — поэтому отключаем */
+@media (hover: hover) {
+  .nav-link:hover {
+    color: var(--gold);
+  }
 }
 
 /* Класс .active будет вешать наш JavaScript на пункт той секции,
@@ -148,6 +157,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-repeat: no-repeat;      /* не замощать при сдвигах */
+  background-size: auto 130%;        /* картинка на 30% выше блока — запас для параллакса */
 }
 
 .section-title {
@@ -240,7 +251,6 @@ body {
   justify-content: center;
   transition: transform 0.15s, background 0.2s;
 }
-.player-btn:hover { background: #b8931f; transform: scale(1.06); }
 .player-btn svg { width: 22px; height: 22px; fill: #fff; }
 
 /* Переключение иконок: по умолчанию видна play, у играющего — pause */
@@ -265,7 +275,6 @@ body {
   cursor: pointer;
   position: relative;
 }
-.player-progress:hover { height: 8px; margin-top: -1px; margin-bottom: -1px; }
 
 .player-progress-fill {
   height: 100%;
@@ -484,10 +493,6 @@ body {
   transition: background 0.25s, transform 0.25s;
 }
 
-.btn-contact:hover {
-  background: #1d4fd7;
-  transform: translateY(-2px); /* кнопка чуть «приподнимается» при наведении */
-}
 
 /* ============================================================
    ПОДВАЛ
@@ -520,11 +525,6 @@ body {
   transition: border-color 0.25s, color 0.25s;
 }
 
-.social-link:hover {
-  color: var(--gold);
-  border-color: var(--gold);
-}
-
 .social-link svg {
   width: 20px;
   height: 20px;
@@ -543,7 +543,41 @@ body {
    АДАПТИВ ДЛЯ ТЕЛЕФОНОВ
    @media = «применяй эти стили, только если экран уже 800px»
    ============================================================ */
-@media (max-width: 800px) {
+
+/* ============================================================
+   ХОВЕРЫ — только для устройств с курсором.
+   На тачскринах hover залипает после тапа, поэтому здесь.
+   ============================================================ */
+@media (hover: hover) {
+
+  .nav-link:hover {
+    color: var(--gold);
+  }
+
+  .btn-contact:hover {
+    background: #1d4fd7;
+    transform: translateY(-2px);
+  }
+
+  .social-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .player-btn:hover {
+    background: #b8931f;
+    transform: scale(1.06);
+  }
+
+  .player-progress:hover {
+    height: 8px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+  }
+
+}
+
+   @media (max-width: 800px) {
   .bio {
     grid-template-columns: 1fr; /* колонки складываются в одну: текст, под ним фото */
   }
@@ -561,12 +595,87 @@ body {
     padding: 80px 24px;
   }
 
-  .nav-link {
-    padding: 4px 10px;
-    font-size: 11px;
-  }
-
   .section {
     scroll-margin-top: 96px; /* на телефоне меню в две строки — отступ больше */
   }
+
+    .section-banner {
+    height: 150px; /* компактная лента вместо полэкрана */
+    background-size: auto 170%; /* на телефоне: высота с большим запасом, ширина по пропорции */
+  }
+
+  .section-title {
+    letter-spacing: 3px; /* и разрядку букв поменьше — на узком экране 6px давит */
+  }
+
+    .divider {
+    padding: 20px 25px;
+  }
+
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+  }
+
+  .nav-logo {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
+  }
+
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-burger span {
+    display: block;
+    height: 2px;
+    background: var(--text);
+    border-radius: 1px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(13, 13, 15, 0.97);
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .nav.open {
+    max-height: 420px;
+  }
+
+  .nav-link {
+    padding: 16px 24px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
 }

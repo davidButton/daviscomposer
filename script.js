@@ -224,3 +224,25 @@ players.forEach((player) => {
     audio.currentTime = 0;
   });
 });
+
+/* ============================================================
+   БУРГЕР-МЕНЮ (мобильные)
+   ============================================================ */
+
+const burger = document.querySelector('.nav-burger');
+const nav = document.querySelector('.nav');
+
+burger.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('open'); // toggle возвращает: класс теперь есть?
+  burger.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+});
+
+// Тап по пункту меню: закрыть панель (прокрутку сделает сам браузер по якорю)
+navLinks.forEach((link) => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
