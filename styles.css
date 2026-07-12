@@ -406,6 +406,26 @@ body {
   background: #0e0e12;
 }
 
+.btn-contact:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 40px; /* контур скругляется вместе с кнопкой */
+}
+
+.btn-contact:focus:not(:focus-visible) {
+  outline: none; /* после клика мышью контур не нужен — фокус и так очевиден */
+}
+
+.email-copy:focus-visible,
+.player-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.email-copy:focus:not(:focus-visible),
+.player-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .order-video {
   position: absolute;
   top: 0;
@@ -460,13 +480,19 @@ body {
 }
 
 .order-content {
-  max-width: 1160px;
-  margin: 0 auto;
+  max-width: 640px;
+  margin: 0;
   width: 100%;
 
   /* контент — верхний слой, поверх видео */
   position: relative;
   z-index: 1;
+
+  background: rgba(13, 13, 15, 0.38);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 48px;
 }
 
 .order-title {
@@ -477,7 +503,7 @@ body {
 
 .order-text {
   font-size: 19px;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 40px;
 }
 
@@ -492,6 +518,71 @@ body {
   border-radius: 40px;
   transition: background 0.25s, transform 0.25s;
 }
+
+.order-email {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.email-text {
+  font-size: 17px;
+  color: var(--text-dim);
+}
+
+.email-copy {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--text);
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.contact-form {
+  max-width: 560px;
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.form-row .form-field { flex: 1; } /* имя и email делят строку пополам */
+
+.form-field {
+  width: 100%;
+  background: rgba(13, 13, 15, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;   /* поля наследуют Montserrat, а не системный шрифт */
+  font-size: 15px;
+  padding: 13px 16px;
+}
+
+.form-field::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.form-field:focus {
+  outline: none;
+  border-color: var(--gold); /* активное поле подсвечивается нашим жёлтым */
+}
+
+textarea.form-field {
+  resize: vertical;      /* тянуть можно только вниз, не вбок */
+  margin-bottom: 18px;
+}
+
+.form-status {
+  margin-top: 14px;
+  font-size: 14px;
+  min-height: 20px;
+}
+.form-status.ok  { color: #8fce8f; }
+.form-status.err { color: #e08a8a; }
 
 
 /* ============================================================
@@ -550,6 +641,8 @@ body {
    ============================================================ */
 @media (hover: hover) {
 
+  .email-copy:hover { border-color: var(--gold); color: var(--gold); }
+
   .nav-link:hover {
     color: var(--gold);
   }
@@ -578,9 +671,16 @@ body {
 }
 
    @media (max-width: 800px) {
-  .bio {
+  
+  .form-row { flex-direction: column; } /* имя и email столбиком на узком экране */
+  
+    .bio {
     grid-template-columns: 1fr; /* колонки складываются в одну: текст, под ним фото */
   }
+
+  .order-content {
+      padding: 28px 20px;
+    }
 
   .bio-photo {
     min-height: 380px;

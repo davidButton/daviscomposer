@@ -376,12 +376,25 @@
     <div class="order-content">
       <h2 class="order-title">Order Music</h2>
       <p class="order-text">
-        Contact me now to order music or to discuss our cooperation!<br>
-        daviscomposer777@gmail.com
+  Contact me to order music or to discuss our cooperation!
       </p>
-      <!-- mailto: открывает почтовый клиент с уже подставленным адресом -->
-      <a href="mailto:daviscomposer777@gmail.com" class="btn-contact">Contact Me</a>
-    </div>
+
+      <!-- Email с кнопкой копирования — запасной путь для тех, кто пишет со своей почты -->
+      <div class="order-email">
+        <span class="email-text">daviscomposer777@gmail.com</span>
+        <button class="email-copy" type="button" aria-label="Copy email">Copy</button>
+      </div>
+
+      <!-- Форма. action = твой endpoint на Formspree -->
+      <form class="contact-form" action="https://formspree.io/f/mbdnrbdo" method="POST">
+        <div class="form-row">
+          <input class="form-field" type="text" name="name" placeholder="Your name" required>
+          <input class="form-field" type="email" name="email" placeholder="Your email" required>
+        </div>
+        <textarea class="form-field" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+        <button class="btn-contact" type="submit">Send Message</button>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
   </section>
 
   <!-- ============================================ -->

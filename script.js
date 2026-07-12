@@ -246,3 +246,49 @@ navLinks.forEach((link) => {
     burger.setAttribute('aria-expanded', 'false');
   });
 });
+
+/* ============================================================
+   ФОРМА ОБРАТНОЙ СВЯЗИ + копирование email
+   ============================================================ */
+
+// Копирование адреса в буфер обмена
+const copyBtn = document.querySelector('.email-copy');
+const emailText = document.querySelector('.email-text');
+
+copyBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(emailText.textContent).then(() => {
+    copyBtn.textContent = 'Copied!';                       // мгновенная обратная связь
+    setTimeout(() => (copyBtn.textContent = 'Copy'), 2000); // и вернуть через 2 сек
+  });
+});
+
+// Отправка формы без перезагрузки страницы
+const form = document.querySelector('.contact-form');
+const statusEl = document.querySelector('.form-status');
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault(); // отменить стандартную отправку с уходом со страницы
+
+  statusEl.textContent = 'Sending...';
+  statusEl.className = 'form-status';
+
+  try {
+    // fetch — отправка запроса кодом. FormData сам собирает поля формы
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }, // просим Formspree ответить данными, а не страницей
+    });
+
+    if (response.ok) {
+      statusEl.textContent = 'Message sent! I will get back to you soon.';
+      statusEl.className = 'form-status ok';
+      form.reset(); // очистить поля
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (err) {
+    statusEl.textContent = 'Something went wrong. Please email me directly.';
+    statusEl.className = 'form-status err';
+  }
+});
