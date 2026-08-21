@@ -292,3 +292,18 @@ form.addEventListener('submit', async (event) => {
     statusEl.className = 'form-status err';
   }
 });
+
+/* ============================================================
+   Подгонка отступа шапки под реальную высоту плашки-анонса
+   ============================================================ */
+const announcement = document.querySelector('.announcement');
+
+function adjustForAnnouncement() {
+  const h = announcement ? announcement.offsetHeight : 0;
+  document.documentElement.style.setProperty('--announcement-h', h + 'px');
+}
+
+if (announcement) {
+  adjustForAnnouncement();
+  window.addEventListener('resize', adjustForAnnouncement); // пересчитать при повороте экрана/ресайзе
+}

@@ -17,6 +17,7 @@
   --light-bg: #ffffff;   /* белый — для секций с треками */
   --soft-gray: #f0f0ee;  /* мягкий серый — для цитаты и биографии */
   --dark-text: #1a1a1a;     /* тёмный текст на светлом фоне */
+  --announcement-h: 40px;
 }
 
 /* ---------- СБРОС ----------
@@ -46,11 +47,48 @@ body {
 }
 
 /* ============================================================
+   ПЛАШКА-АНОНС
+   ============================================================ */
+.announcement {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 101;              /* выше шапки (у неё 100) — плашка над всем */
+  background: var(--gold);
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.announcement-link {
+  display: inline-flex;       /* текст и стрелка в ряд */
+  align-items: center;
+  gap: 6px;
+  color: #1a1a1a;
+  text-decoration: underline; /* подчёркнуто всегда, не только на hover */
+  text-underline-offset: 3px; /* небольшой отступ линии от текста — аккуратнее смотрится */
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.announcement-arrow {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.announcement-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
    МЕНЮ (ШАПКА)
    ============================================================ */
 .site-header {
   position: fixed;   /* «приклеено» к окну браузера — не двигается при скролле */
-  top: 0;
+  top: var(--announcement-h);
   left: 0;
   width: 100%;
   z-index: 100;      /* поверх всего остального контента */
@@ -102,7 +140,7 @@ body {
 .section {
   /* scroll-margin-top: когда меню прокручивает к секции, оставить сверху отступ,
      чтобы фиксированная шапка не закрывала заголовок */
-  scroll-margin-top: 64px;
+  scroll-margin-top: 104px;
 }
 
 /* ============================================================
@@ -668,6 +706,10 @@ textarea.form-field {
     margin-bottom: -1px;
   }
 
+    .announcement-link:hover .announcement-arrow {
+    transform: translateX(3px);
+  }
+
 }
 
    @media (max-width: 800px) {
@@ -696,7 +738,7 @@ textarea.form-field {
   }
 
   .section {
-    scroll-margin-top: 96px; /* на телефоне меню в две строки — отступ больше */
+    scroll-margin-top: 136px; /* на телефоне меню в две строки — отступ больше */
   }
 
     .section-banner {
@@ -776,6 +818,15 @@ textarea.form-field {
     padding: 16px 24px;
     font-size: 13px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .announcement-link span {
+    font-size: 13px; /* чуть мельче на мобильном, чтобы влезало в одну строку */
+  }
+
+  .announcement-link {
+    gap: 5px;
+    padding: 0 8px; /* небольшой запас по бокам, чтобы текст не упирался в край */
   }
 
 }
