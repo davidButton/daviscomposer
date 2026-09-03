@@ -147,19 +147,15 @@ body {
    СЕКЦИЯ 1: ГЛАВНАЯ (HERO)
    ============================================================ */
 .hero {
-  min-height: 100vh;  /* 100vh = высота всего окна браузера, секция на весь экран */
+  min-height: 100vh;
   display: flex;
-  align-items: center;      /* центр по вертикали */
-  justify-content: center;  /* центр по горизонтали */
+  align-items: center;
+  justify-content: center;
   text-align: center;
-
-  /* Фон: пока это тёмный градиент-заглушка.
-     Когда пришлёшь своё фоновое фото, заменим на:
-     background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('images/hero.jpg') center/cover; */
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('images/hero.jpg') center/cover;
   padding: 120px 24px 60px;
+  position: relative;
+  overflow: hidden;
+  background: #050506;
 }
 
 .hero-title {
@@ -185,6 +181,63 @@ body {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-bg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-scene {
+  animation: hero-drift 30s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes hero-drift {
+  from { transform: scale(1.08) translate(20px, 10px); }
+  to   { transform: scale(1.08) translate(-20px, -14px); }
+}
+
+.star-twinkle {
+  animation: star-blink 2.5s ease-in-out infinite;
+}
+.star-twinkle:nth-child(3n)  { animation-delay: -1.3s; animation-duration: 5s; }
+.star-twinkle:nth-child(5n)  { animation-delay: -2.6s; animation-duration: 3.4s; }
+.star-twinkle:nth-child(7n)  { animation-delay: -0.8s; animation-duration: 6s; }
+
+@keyframes star-blink {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+
+.star-twinkle-bright {
+  animation-name: star-blink-bright;
+}
+@keyframes star-blink-bright {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+.hero-glow-warm {
+  animation: glow-pulse 5s ease-in-out infinite;
+}
+.hero-glow-white {
+  animation: glow-pulse 8s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1.15; }
 }
 
 /* ============================================================
@@ -509,7 +562,7 @@ body {
 
 /* Уважение к настройке "уменьшить анимацию" */
 @media (prefers-reduced-motion: reduce) {
-  .playhead, .clip, .order-video svg { animation: none; }
+    .playhead, .clip, .order-video svg, .particle, .hero-scene, .star-twinkle, .hero-glow-warm, .hero-glow-white { animation: none; }
 }
 
 .order-video iframe {
