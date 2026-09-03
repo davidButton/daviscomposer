@@ -249,7 +249,15 @@ body {
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;      /* не замощать при сдвигах */
-  background-size: auto 130%;        /* картинка на 30% выше блока — запас для параллакса */
+  background-size: auto 130%; 
+  position: relative;       /* картинка на 30% выше блока — запас для параллакса */
+}
+
+
+/* Заголовок должен остаться поверх затемнения */
+.section-banner .section-title {
+  position: relative;
+  z-index: 2;
 }
 
 .section-title {
@@ -265,8 +273,8 @@ body {
    Заменим на твои изображения, когда положишь их в папку images:
    background: url('images/soundtracks.jpg') center/cover;  */
 .banner-soundtracks {
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
     url('images/banner-soundtracks.svg') center/cover;
 }
 
@@ -315,9 +323,10 @@ body {
 .player-cover {
   width: 96px;
   height: 96px;
-  object-fit: cover;
+  object-fit: contain; /* было cover — SVG со своими полями лучше вписывается без обрезки */
   border-radius: 6px;
-  flex-shrink: 0; /* обложка не сжимается, когда тесно */
+  flex-shrink: 0;
+  background: #141416; /* фон под иконкой, на случай прозрачных краёв */
 }
 
 .player-body { flex: 1; min-width: 0; } /* занять всё остальное место */
@@ -386,18 +395,8 @@ body {
 /* ============================================================
    РАЗДЕЛИТЕЛИ МЕЖДУ СЕКЦИЯМИ
    ============================================================ */
-.divider {
-  background: #ffffff;
-  padding: 30px 24px;
-}
 
-.divider::after {
-  content: '';
-  display: block;
-  max-width: 1160px;
-  margin: 0 auto;
-  border-top: 1px solid #d9d9d6;
-}
+   /*думаем
 
 /* ============================================================
    СВЕТЛЫЕ СЕКЦИИ (About Music, Bio)
@@ -802,11 +801,6 @@ textarea.form-field {
   .section-title {
     letter-spacing: 3px; /* и разрядку букв поменьше — на узком экране 6px давит */
   }
-
-    .divider {
-    padding: 20px 25px;
-  }
-
 
   .site-header {
     display: flex;
