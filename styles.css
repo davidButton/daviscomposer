@@ -240,6 +240,66 @@ body {
   50%      { opacity: 1.15; }
 }
 
+/* ===== ОТСЧЁТ ДО РЕЛИЗА ===== */
+.countdown {
+  margin-top: 46px;
+}
+
+.countdown-label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+}
+
+.countdown-album {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 62px;
+}
+
+.countdown-value {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text);
+  /* Табличные цифры: все одной ширины, таймер не «дёргается» при смене секунд */
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-name {
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Когда релиз состоялся — блок превращается в ссылку-анонс */
+.countdown.is-released .countdown-timer {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .countdown-timer { gap: 18px; }
+  .countdown-value { font-size: 32px; }
+  .countdown-unit { min-width: 46px; }
+}
+
 /* ============================================================
    БАННЕРЫ-ЗАГОЛОВКИ СЕКЦИЙ (Soundtracks / Video Games / Classical)
    ============================================================ */

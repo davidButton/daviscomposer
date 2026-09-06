@@ -307,3 +307,46 @@ if (announcement) {
   adjustForAnnouncement();
   window.addEventListener('resize', adjustForAnnouncement); // пересчитать при повороте экрана/ресайзе
 }
+
+
+/* ============================================================
+   ОТСЧЁТ ДО РЕЛИЗА
+   ============================================================ */
+const countdown = document.querySelector('.countdown');
+
+if (countdown) {
+  // Дата берётся из data-release — в JS её менять не нужно
+  const releaseTime = new Date(countdown.dataset.release).getTime();
+  const label = countdown.querySelector('.countdown-label');
+  const values = {
+    days: countdown.querySelector('[data-unit="days"]'),
+    hours: countdown.querySelector('[data-unit="hours"]'),
+    minutes: countdown.querySelector('[data-unit="minutes"]'),
+    seconds: countdown.querySelector('[data-unit="seconds"]'),
+  };
+
+  // 7 -> "07"
+  const pad = (n) => String(n).padStart(2, '0');
+
+  function tick() {
+    const diff = releaseTime - Date.now(); // миллисекунд осталось
+
+    if (diff <= 0) {
+      // Релиз состоялся — меняем блок сам, без твоего участия
+      countdown.classList.add('is-released');
+      label.innerHTML = 'New album <span class="countdown-album">Terraformental OST</span> — out now on all platforms';
+      clearInterval(timer);
+      return;
+    }
+
+    // 1000 мс в секунде, 60 сек в минуте, 60 мин в часе, 24 часа в сутках
+    const totalSeconds = Math.floor(diff / 1000);
+    values.days.textContent = pad(Math.floor(totalSeconds / 86400));
+    values.hours.textContent = pad(Math.floor(totalSeconds / 3600) % 24);
+    values.minutes.textContent = pad(Math.floor(totalSeconds / 60) % 60);
+    values.seconds.textContent = pad(totalSeconds % 60);
+  }
+
+  tick();                              // сразу, чтобы не мигало нулями
+  const timer = setInterval(tick, 1000); // и дальше раз в секунду
+}
