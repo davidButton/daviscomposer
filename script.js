@@ -334,7 +334,7 @@ if (countdown) {
     if (diff <= 0) {
       // Релиз состоялся — меняем блок сам, без твоего участия
       countdown.classList.add('is-released');
-      label.innerHTML = 'New album <span class="countdown-album">Terraformental OST</span> — out now on all platforms';
+      label.innerHTML = 'New album <a href="https://distrokid.com/hyperfollow/daviddavis4/terraformental-original-game-soundtrack" target="_blank" class="countdown-link">Terraformental OST</a> — out now on all platforms';
       clearInterval(timer);
       return;
     }
